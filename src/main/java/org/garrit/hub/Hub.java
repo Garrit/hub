@@ -4,7 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-import org.garrit.common.statuses.Status;
+import org.garrit.common.messages.statuses.Status;
 
 /**
  * Main entry point for the hub service.
