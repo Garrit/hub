@@ -1,7 +1,7 @@
 name: hub-00
-executor: http://executor:7166
-judge: http://judge:7167
-reporter: http://reporter:7168
+executor: http://executor:7166/
+judge: http://judge:7167/
+reporter: http://reporter:7168/
 
 idTracker: lastid
 
