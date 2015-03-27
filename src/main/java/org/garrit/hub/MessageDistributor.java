@@ -35,19 +35,19 @@ public class MessageDistributor implements NegotiatorStatus
     public void distribute(RegisteredSubmission execution)
             throws JsonProcessingException, ClientProtocolException, IOException
     {
-        this.distribute(execution, this.executor.resolve("execute"));
+        this.distribute(execution, this.executor.resolve("/execute"));
     }
 
     public void distribute(Execution execution)
             throws JsonProcessingException, ClientProtocolException, IOException
     {
-        this.distribute(execution, this.judge.resolve("judge"));
+        this.distribute(execution, this.judge.resolve("/judge"));
     }
 
     public void distribute(Judgement execution)
             throws JsonProcessingException, ClientProtocolException, IOException
     {
-        this.distribute(execution, this.reporter.resolve("report"));
+        this.distribute(execution, this.reporter.resolve("/report"));
     }
 
     private void distribute(RegisteredSubmission submission, URI target)
@@ -58,6 +58,7 @@ public class MessageDistributor implements NegotiatorStatus
         HttpClient client = HttpClients.createDefault();
         HttpPost post = new HttpPost(target);
         HttpEntity body = new ByteArrayEntity(mapper.writeValueAsBytes(submission));
+        post.setHeader("Content-Type", "application/json");
         post.setEntity(body);
 
         client.execute(post);
