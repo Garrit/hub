@@ -3,6 +3,7 @@ package org.garrit.hub;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class FilePersistingIdGenerator implements IdGenerator
             Scanner scanner = new Scanner(idTracker);
             this.lastId = scanner.nextInt();
         }
-        catch (IOException e)
+        catch (IOException | NoSuchElementException e)
         {
             log.warn("Couldn't read last ID from file. Next ID generated will be 1.");
             this.lastId = 0;
