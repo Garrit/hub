@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
+import org.garrit.common.messages.statuses.NegotiatorStatus;
 import org.garrit.common.messages.statuses.Status;
 
 /**
@@ -12,19 +13,19 @@ import org.garrit.common.messages.statuses.Status;
  * @author Samuel Coleman <samuel@seenet.ca>
  * @since 1.0.0
  */
-public class Hub extends Application<HubConfiguration>
+public class HubApplication extends Application<HubConfiguration>
 {
     private Status status;
 
     public static void main(String[] args) throws Exception
     {
-        new Hub().run(args);
+        new HubApplication().run(args);
     }
 
     @Override
     public String getName()
     {
-        return Hub.class.getName();
+        return HubApplication.class.getName();
     }
 
     @Override
@@ -36,6 +37,10 @@ public class Hub extends Application<HubConfiguration>
     public void run(HubConfiguration config, Environment env) throws Exception
     {
         this.status = new Status(config.getName());
+        this.status.setCapabilityStatus(new NegotiatorStatus()
+        {
+        });
+
         final StatusResource statusResource = new StatusResource(this.status);
 
         env.jersey().register(statusResource);

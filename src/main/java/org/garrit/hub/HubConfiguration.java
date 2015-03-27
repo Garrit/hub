@@ -1,6 +1,9 @@
 package org.garrit.hub;
 
 import io.dropwizard.Configuration;
+
+import java.net.URI;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -9,4 +12,7 @@ import lombok.EqualsAndHashCode;
 public class HubConfiguration extends Configuration
 {
     private String name;
+    private URI executor;
+    private URI judge;
+    private URI reporter;
 }
