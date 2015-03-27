@@ -27,9 +27,8 @@ public class FilePersistingIdGenerator implements IdGenerator
     {
         this.idTracker = idTracker;
 
-        try
+        try (Scanner scanner = new Scanner(idTracker))
         {
-            Scanner scanner = new Scanner(idTracker);
             this.lastId = scanner.nextInt();
         }
         catch (IOException | NoSuchElementException e)
