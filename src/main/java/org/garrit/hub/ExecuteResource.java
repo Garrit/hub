@@ -30,11 +30,13 @@ import org.garrit.common.messages.Submission;
 public class ExecuteResource
 {
     private final MessageDistributor distributor;
+    private final IdGenerator idGenerator;
 
     @POST
     public Response judge(Submission submission)
     {
         RegisteredSubmission registeredSubmission = new RegisteredSubmission(submission);
+        registeredSubmission.setId(this.idGenerator.getId(submission));
 
         try
         {

@@ -41,8 +41,10 @@ public class HubApplication extends Application<HubConfiguration>
         this.status = new Status(config.getName());
         this.status.setCapabilityStatus(this.distributor);
 
+        FilePersistingIdGenerator idGenerator = new FilePersistingIdGenerator(config.getIdTracker());
+
         final StatusResource statusResource = new StatusResource(this.status);
-        final ExecuteResource executeResource = new ExecuteResource(this.distributor);
+        final ExecuteResource executeResource = new ExecuteResource(this.distributor, idGenerator);
         final JudgeResource judgeResource = new JudgeResource(this.distributor);
         final ReportResource reportResource = new ReportResource(this.distributor);
 

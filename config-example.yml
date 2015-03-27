@@ -3,6 +3,8 @@ executor: http://executor:7166
 judge: http://judge:7167
 reporter: http://reporter:7168
 
+idTracker: lastid
+
 server:
   applicationConnectors:
   - type: http

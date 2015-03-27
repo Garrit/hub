@@ -3,6 +3,7 @@ package org.garrit.hub;
 import io.dropwizard.Configuration;
 
 import java.net.URI;
+import java.nio.file.Path;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,4 +16,6 @@ public class HubConfiguration extends Configuration
     private URI executor;
     private URI judge;
     private URI reporter;
+
+    private Path idTracker;
 }
