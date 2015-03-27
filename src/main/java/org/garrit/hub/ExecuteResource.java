@@ -46,6 +46,6 @@ public class ExecuteResource
             return Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
 
-        return Response.status(Status.OK).build();
+        return Response.status(Status.OK).entity(registeredSubmission).build();
     }
 }
