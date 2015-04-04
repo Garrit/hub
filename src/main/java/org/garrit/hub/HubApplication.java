@@ -43,11 +43,13 @@ public class HubApplication extends Application<HubConfiguration>
 
         FilePersistingIdGenerator idGenerator = new FilePersistingIdGenerator(config.getIdTracker());
 
+        final ErrorResource errorResource = new ErrorResource(this.distributor);
         final StatusResource statusResource = new StatusResource(this.status);
         final ExecuteResource executeResource = new ExecuteResource(this.distributor, idGenerator);
         final JudgeResource judgeResource = new JudgeResource(this.distributor);
         final ReportResource reportResource = new ReportResource(this.distributor);
 
+        env.jersey().register(errorResource);
         env.jersey().register(statusResource);
         env.jersey().register(executeResource);
         env.jersey().register(judgeResource);

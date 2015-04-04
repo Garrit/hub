@@ -11,6 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.HttpClients;
+import org.garrit.common.messages.ErrorSubmission;
 import org.garrit.common.messages.Execution;
 import org.garrit.common.messages.Judgement;
 import org.garrit.common.messages.RegisteredSubmission;
@@ -50,14 +51,20 @@ public class MessageDistributor implements NegotiatorStatus
         this.distribute(execution, this.reporter.resolve("report"));
     }
 
-    private void distribute(RegisteredSubmission submission, URI target)
+    public void distribute(ErrorSubmission<RegisteredSubmission> error)
+            throws JsonProcessingException, ClientProtocolException, IOException
+    {
+        this.distribute(error, this.reporter.resolve("error"));
+    }
+
+    private void distribute(Object message, URI target)
             throws JsonProcessingException, ClientProtocolException, IOException
     {
         ObjectMapper mapper = new ObjectMapper();
 
         HttpClient client = HttpClients.createDefault();
         HttpPost post = new HttpPost(target);
-        HttpEntity body = new ByteArrayEntity(mapper.writeValueAsBytes(submission));
+        HttpEntity body = new ByteArrayEntity(mapper.writeValueAsBytes(message));
         post.setHeader("Content-Type", "application/json");
         post.setEntity(body);
 
