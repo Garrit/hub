@@ -43,9 +43,9 @@ public class FilePersistingIdGenerator implements IdGenerator
     {
         this.lastId++;
 
-        try
+        try (FileWriter writer = new FileWriter(this.idTracker.toFile()))
         {
-            new FileWriter(this.idTracker.toFile()).write(String.format("%d\n", this.lastId));
+            writer.write(String.format("%d\n", this.lastId));
         }
         catch (IOException e)
         {
