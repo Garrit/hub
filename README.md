@@ -13,7 +13,7 @@ After checking out the repository, it can be built with
 mvn package
 ```
 
-This will generate an executable JAR, `./target/hub-1.0.0-SNAPSHOT.jar`.
+This will generate an executable JAR, `target/hub-1.0.0.jar`.
 
 Usage
 -----
@@ -37,5 +37,5 @@ properties to indicate the appropriate endpoints within your environment.
 Then, to launch the negotiator:
 
 ```
-java -jar /path/to/hub-1.0.0-SNAPSHOT.jar server /path/to/config.yml
+java -jar /path/to/hub-1.0.0.jar server /path/to/config.yml
 ```
